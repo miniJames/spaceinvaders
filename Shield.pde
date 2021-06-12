@@ -9,12 +9,11 @@ class Shield {
   }
 
   void show() {
-          noStroke();
-    if(shieldStrength==2){
-      fill(0,255,0);
-
+    noStroke();
+    if (shieldStrength==2) {
+      fill(0, 255, 0);
     } else {
-      fill(0,128,0);  
+      fill(0, 128, 0);
     }
     rect(pos.x, pos.y, 10, 20);
   }

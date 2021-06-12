@@ -10,6 +10,8 @@ class Enemy {
 
   void show() {
     fill(255);
+    stroke(255);
+    noStroke();
     square(pos.x, pos.y, wide);
   }
 
