@@ -87,7 +87,8 @@ class SpaceShip {
     for(int i=bombs.size();i>0;i--){
       PVector bomb = bombs.get(i-1);
       if(bomb.x > pos.x && bomb.x+2 < pos.x + 50 && bomb.y > pos.y && bomb.y+10 < pos.y + 20){
-        //println("I AM DEAD");
+        
+        println("I AM DEAD");
         return false;
         
       }

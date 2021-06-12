@@ -40,27 +40,28 @@ class Enemies {
       }
     }
 
-
-    //find left most enemy.
-    Enemy leftMost=e.get(0);
-    for (int i=1; i<e.size(); i++) {
-      Enemy current = e.get(i);
-      if (current.pos.x < leftMost.pos.x) {
-        leftMost=current;
+    if (e.size() > 0) {
+      //find left most enemy.
+      Enemy leftMost=e.get(0);
+      for (int i=1; i<e.size(); i++) {
+        Enemy current = e.get(i);
+        if (current.pos.x < leftMost.pos.x) {
+          leftMost=current;
+        }
       }
-    }
-    //find right most enemy
-    Enemy rightMost=e.get(0);
-    for (int i=1; i<e.size(); i++) {
-      Enemy current = e.get(i);
-      if (current.pos.x > rightMost.pos.x) {
-        rightMost=current;
+      //find right most enemy
+      Enemy rightMost=e.get(0);
+      for (int i=1; i<e.size(); i++) {
+        Enemy current = e.get(i);
+        if (current.pos.x > rightMost.pos.x) {
+          rightMost=current;
+        }
       }
-    }
 
-    if (leftMost.pos.x < 20 || rightMost.pos.x+ rightMost.wide > width - 20) {
-      for (Enemy enemy : e) {
-        enemy.changeDirection();
+      if (leftMost.pos.x < 20 || rightMost.pos.x+ rightMost.wide > width - 20) {
+        for (Enemy enemy : e) {
+          enemy.changeDirection();
+        }
       }
     }
     //if (counter % 320==0) {
@@ -102,8 +103,8 @@ class Enemies {
 
     return false;
   }
-  void whoDied(ArrayList<PVector> bullets) {
-
+  int whoDied(ArrayList<PVector> bullets) {
+  int score = 0;
     for (int i=e.size(); i>0; i--) {
       Enemy enemy = e.get(i-1);
 
@@ -114,8 +115,11 @@ class Enemies {
           bullet.y > enemy.pos.y && bullet.y+10 < enemy.pos.y + enemy.wide) {
           e.remove(enemy);  
           bullets.remove(bullet);
+          score +=10;
         }
       }
-    }
+    }  
+    return score;
   }
+
 }

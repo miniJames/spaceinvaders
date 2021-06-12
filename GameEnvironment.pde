@@ -65,8 +65,14 @@ class GameEnvironment {
   }
 
   void show() {  
-    println(getGameState());
+    //println(getGameState());
+    textSize(15);
+    fill(255);
+    text("Score:" + currentScore, 350,20);
+    text("High Score:" + highScore, 850,20);
     if (gameState==menu) {
+      textSize(30);
+      fill(0,255,0);
       text("Press <s> to start", 300, 300);
     } else if (gameState==game) {
 
@@ -84,13 +90,14 @@ class GameEnvironment {
         sc.show();
       }
       stroke(255);
-      strokeWeight(3);
+      //strokeWeight(3);
       textSize(30);
+      fill(255);
       text("You Died", 300, 300);
     } else if (gameState==gameOver) {
       textSize(30);
-      strokeWeight(5);
-      stroke(255);
+      
+      fill(255,255,0);
       text("Game Over", 300, 300);
     }
   }
@@ -98,10 +105,11 @@ class GameEnvironment {
     if (gameState==game) {
       boolean alive;
       alive=s.stillAlive(e.bombs);
+      
       if (alive) {
         e.update();
         s.update(); 
-        e.whoDied(s.bullets);
+        currentScore +=e.whoDied(s.bullets);
       }
 
 
@@ -142,6 +150,13 @@ class GameEnvironment {
         shields.add( new ShieldCluster(350, 800));
         shields.add( new ShieldCluster(550, 800));
         shields.add(new ShieldCluster(750, 800));
+        
+        if(currentScore > highScore){
+          highScore=currentScore;      
+        }
+        currentScore=0;
+        currentLives=3;
+        deathStart=0;
       }
     }
   }
